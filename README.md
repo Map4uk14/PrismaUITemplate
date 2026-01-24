@@ -36,8 +36,8 @@ npm run dev
 Modify CMakeLists.txt with your name and the name of your mod
 ```cmake
 set(AUTHOR_NAME "AuthorName")
-set(PRODUCT_NAME "SKSEMenuFrameworkExample")
-set(BEAUTIFUL_NAME "SKSE Menu Framework Example")
+set(PRODUCT_NAME "PrismaUISKSETemplate")
+set(BEAUTIFUL_NAME "PrismaUI SKSE Template")
 ```
 
 Delete the LICENCE file and use git to create the licence you want your mod to be
