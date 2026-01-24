@@ -22,7 +22,6 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
     SetupLog();
     logger::info("Plugin loaded");
-    UI::Register();
     Hooks::Install();
     Prisma::Install();
     return true;
