@@ -6,7 +6,7 @@
 
 ## DEV Server
 
-By default when building with the debvug target, the static html files will not be generated, instead and dev server will be used.
+By default when building with the debug target, the static html files will not be generated, instead and dev server will be used.
 
 You can disable it by setting the following command to off
 
