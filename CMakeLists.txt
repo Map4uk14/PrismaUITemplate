@@ -63,6 +63,8 @@ set(ENABLE_SKYRIM_SE ON CACHE BOOL " " FORCE)
 set(ENABLE_SKYRIM_AE ON CACHE BOOL " " FORCE)
 set(ENABLE_SKYRIM_VR OFF CACHE BOOL " " FORCE)
 set(BUILD_TESTS OFF CACHE BOOL " " FORCE)
+set(DEV_SERVER ON CACHE BOOL " " FORCE)
+
 
 add_subdirectory("$ENV{COMMONLIB_SSE_FOLDER}" ${CMAKE_CURRENT_BINARY_DIR}/_deps/clib-build)
 get_target_property(COMMONLIB_SRC_DIR CommonLibSSE SOURCE_DIR)
@@ -97,6 +99,7 @@ add_commonlibsse_plugin(
 )
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) 
 target_precompile_headers(${PROJECT_NAME} PRIVATE include/PCH.h)
+
 target_compile_definitions(${PROJECT_NAME}  PRIVATE BEAUTIFUL_NAME="${BEAUTIFUL_NAME}" PRODUCT_NAME="${PRODUCT_NAME}" IMGUI_DEFINE_MATH_OPERATORS)
 
 
@@ -128,6 +131,15 @@ target_compile_definitions(${PRODUCT_NAME} PRIVATE MOD_NAME="${BEAUTIFUL_NAME}")
 #                        Npm                           #
 # ---------------------------------------------------- #
 
+if(NOT ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    set(DEV_SERVER OFF)
+endif()
+
+if(DEV_SERVER)
+    add_compile_definitions(DEV_SERVER)
+endif()
+
+if(NOT ${DEV_SERVER})
 set(UI_DIR ${CMAKE_SOURCE_DIR}/ui)
 set(UI_BUILD_DIR ${UI_DIR}/dist)
 set(UI_OUTPUT_DIR ${CMAKE_BINARY_DIR}/PrismaUI/views/${PRODUCT_NAME})
@@ -154,6 +166,8 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${UI_BUILD_DIR} ${UI_OUTPUT_DIR}
     DEPENDS ${UI_BUILD_DIR}
 )
+
+endif()
 
 add_custom_target(build_ui ALL
     DEPENDS ${UI_OUTPUT_DIR}

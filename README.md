@@ -1,6 +1,35 @@
-## This template requires Prisma UI
+## This template requires Prisma UI and nodejs
 
-[Here is how to install](https://www.prismaui.dev/getting-started/installation/)
+- [Prisma UI](https://www.prismaui.dev/getting-started/installation/)
+- [NodeJS](https://nodejs.org/pt-br/download)
+- You might also want to install the svelte extesion for visual stuio or vscode
+
+## DEV Server
+
+By default when building with the debvug target, the static html files will not be generated, instead and dev server will be used.
+
+You can disable it by setting the following command to off
+
+```cmake
+set(DEV_SERVER OFF CACHE BOOL " " FORCE)
+```
+
+to start the dev server you can run the following commands on the root directory
+
+every time
+```ps
+cd ui
+```
+
+only the first time
+```ps
+npm install
+```
+
+every time
+```ps
+npm run dev
+```
 
 ## If you want to create a mod based on this project you should:
 

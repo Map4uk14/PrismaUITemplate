@@ -14,4 +14,3 @@ void __stdcall UI::Main::Render() {
         Prisma::Show();
     }
 }
-
