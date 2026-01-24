@@ -132,22 +132,34 @@ set(UI_DIR ${CMAKE_SOURCE_DIR}/ui)
 set(UI_BUILD_DIR ${UI_DIR}/dist)
 set(UI_OUTPUT_DIR ${CMAKE_BINARY_DIR}/PrismaUI/views/${PRODUCT_NAME})
 
-add_custom_target(build_ui ALL
+file(GLOB_RECURSE UI_SOURCES
+    ${UI_DIR}/*
+)
+
+list(FILTER UI_SOURCES EXCLUDE REGEX ".*/dist/.*")
+list(FILTER UI_SOURCES EXCLUDE REGEX ".*/node_modules/.*")
+
+add_custom_command(
+    OUTPUT ${UI_BUILD_DIR}
+    COMMAND ${CMAKE_COMMAND} -E rm -rf ${UI_OUTPUT_DIR}
     COMMAND npm install
     COMMAND npm run build
     WORKING_DIRECTORY ${UI_DIR}
+    DEPENDS ${UI_SOURCES}
 )
 
-add_custom_target(copy_ui ALL
-    COMMAND ${CMAKE_COMMAND} -E rm -rf ${UI_OUTPUT_DIR}
+add_custom_command(
+    OUTPUT ${UI_OUTPUT_DIR}
     COMMAND ${CMAKE_COMMAND} -E make_directory ${UI_OUTPUT_DIR}
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${UI_BUILD_DIR}
-        ${UI_OUTPUT_DIR}
-    DEPENDS build_ui
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${UI_BUILD_DIR} ${UI_OUTPUT_DIR}
+    DEPENDS ${UI_BUILD_DIR}
 )
 
-add_dependencies(${PROJECT_NAME} copy_ui)
+add_custom_target(build_ui ALL
+    DEPENDS ${UI_OUTPUT_DIR}
+)
+
+add_dependencies(${PROJECT_NAME} build_ui)
 
 # ---------------------------------------------------- #
 #                        Output                        #

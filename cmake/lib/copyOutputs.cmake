@@ -5,9 +5,8 @@ add_custom_target(copy_public_files ALL
 )
 
 
-
 add_custom_target(copy_ui_to_game ALL
-    DEPENDS copy_ui
+    DEPENDS build_ui
     COMMENT "Copying UI..."
 )
 
