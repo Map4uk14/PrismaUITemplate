@@ -136,10 +136,19 @@ if(NOT ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 endif()
 
 if(DEV_SERVER)
-    add_compile_definitions(DEV_SERVER)
-endif()
 
-if(NOT ${DEV_SERVER})
+add_compile_definitions(DEV_SERVER)
+set(PRISMA_UI_DIR ${CMAKE_BINARY_DIR}/PrismaUI)
+add_custom_command(
+    OUTPUT ${PRISMA_UI_DIR}
+    COMMAND ${CMAKE_COMMAND} -E rm -rf ${PRISMA_UI_DIR}
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${PRISMA_UI_DIR}
+)
+add_custom_target(dev_prisma_ui ALL DEPENDS ${PRISMA_UI_DIR})
+
+else()
+
+
 set(UI_DIR ${CMAKE_SOURCE_DIR}/ui)
 set(UI_BUILD_DIR ${UI_DIR}/dist)
 set(UI_OUTPUT_DIR ${CMAKE_BINARY_DIR}/PrismaUI/views/${PRODUCT_NAME})

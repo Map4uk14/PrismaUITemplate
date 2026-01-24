@@ -4,7 +4,6 @@ add_custom_target(copy_public_files ALL
     COMMENT "Copying public files..."
 )
 
-
 add_custom_target(copy_ui_to_game ALL
     DEPENDS build_ui
     COMMENT "Copying UI..."
@@ -40,7 +39,6 @@ function(copyOutputs TARGET_FOLDER)
         )
     endif()
 
-
     file(GLOB_RECURSE PUBLIC_FILES "${CMAKE_SOURCE_DIR}/public/*")
 
     add_custom_command(TARGET copy_public_files PRE_BUILD
@@ -48,13 +46,12 @@ function(copyOutputs TARGET_FOLDER)
             "${CMAKE_CURRENT_SOURCE_DIR}/public"
             "${TARGET_FOLDER}"
     )
-    
+
     add_custom_command(TARGET copy_ui_to_game PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E rm -rf "${TARGET_FOLDER}/PrismaUI"
         COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_BINARY_DIR}/PrismaUI"
             "${TARGET_FOLDER}/PrismaUI"
     )
-    
 
 endfunction()
