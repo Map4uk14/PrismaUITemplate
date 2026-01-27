@@ -1,10 +1,16 @@
 #include "Plugin.h"
 #include "Hooks.h"
 #include "Prisma.h"
+#include "MenuHandler.h"
 
 void OnMessage(SKSE::MessagingInterface::Message* message) {
     if (message->type == SKSE::MessagingInterface::kPostLoad) {
         Prisma::Install();
+    }
+
+    if (message->type == SKSE::MessagingInterface::kDataLoaded) {
+        MenuHandler::Register();
+        logger::info("MenuHandler registered for crafting menu");
     }
 }
 
