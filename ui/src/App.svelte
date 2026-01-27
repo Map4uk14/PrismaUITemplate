@@ -30,7 +30,7 @@
 
 <style>
   .logo {
-    height: 6em;
+    height: 10em;
     padding: 1.5em;
     will-change: filter;
     transition: filter 300ms;
@@ -39,9 +39,9 @@
     filter: drop-shadow(0 0 2em #646cffaa);
   }
   .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
+    filter: drop-shadow(0 0 2em rgba(255, 0, 0, 0.667));
   }
   .read-the-docs {
-    color: #888;
+    color: #7e7d7d;
   }
 </style>
