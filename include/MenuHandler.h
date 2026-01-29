@@ -21,15 +21,10 @@ public:
             return RE::BSEventNotifyControl::kContinue;
         }
 
-        // Проверяем, что это меню готовки
         if (event->menuName == RE::CraftingMenu::MENU_NAME) {
             if (event->opening) {
-                // Меню открывается
-                logger::info("Crafting menu opened");
                 Prisma::Show();
             } else {
-                // Меню закрывается
-                logger::info("Crafting menu closed");
                 Prisma::Hide();
             }
         }

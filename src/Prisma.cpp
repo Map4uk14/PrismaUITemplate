@@ -24,11 +24,9 @@ void Prisma::Show() {
         constexpr const char* path = PRODUCT_NAME "/index.html";
         #endif
 
-
         view = PrismaUI->CreateView(path, [](PrismaView view) -> void { 
             PrismaUI->Focus(view, true);
         });
-
         return;
     }
     PrismaUI->Show(view);

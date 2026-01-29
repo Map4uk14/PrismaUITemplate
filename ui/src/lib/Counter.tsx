@@ -3,10 +3,10 @@ import { motion } from "motion/react"
 
 export default function Counter() {
   const [count, setCount] = useState(0)
-
+  
   return (
     <motion.button
-      
+      animate={{ scale: count > 0 ? 1.1 : 1 }}
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => setCount(count + 1)}
