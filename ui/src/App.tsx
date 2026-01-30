@@ -1,30 +1,36 @@
 import Drag from './lib/Drag'
-import imgUrl from './assets/Pot.png';
+import BoilingEffect from './lib/BoilingEffect'
+import Potimg from './assets/Pot.png';
+import bgImg from './assets/Paper - Sheet 3.png';
+import bellows from './assets/Laboratory Gear - Bellows.png';
 
 function App() {
-  return (
-    <main style={{ display: 'flex', gap: '20px' }}>
+  const closeMenu = () => {
+    (window as any).hideWindow("close");
+  };
 
-      <h1>Vite + React</h1>
+  return (
+    <main style={{ backgroundImage: `url(${bgImg})`, backgroundSize: 'cover', height: '100vh' }}>
+      <h1>Drag the plant into the pot!</h1>
+      <p>And close the window when you're done.</p>
+
+      <button className="close-button" onClick={closeMenu}>
+        Close X
+      </button>
 
       <div className="interactive">
-        <img 
-        src={imgUrl} alt="Descriptive text"
-        style={{ 
-        position: 'absolute', 
-        bottom: 0, 
-        left: '50%', 
-        transform: 'translateX(-50%)',
-        width: '600px' 
-        }}
-        />
-      </div>
-
-      <div className="drag-box">
         <Drag />
       </div>
+
+      <div className="utensils">
+        <img src={bellows} className="bellows-img" />
+        <div className="pot-container">
+          <img src={Potimg} className="pot-img" />
+          <BoilingEffect />
+        </div>
+      </div>
     </main>
-  )
+  );
 }
 
 export default App

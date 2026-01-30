@@ -1,9 +1,24 @@
 import { motion } from "motion/react"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import imgUrl from '../assets/Garden Plants - Foggy Parasol.png';
 
 export default function Drag() {
     const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [constraints, setConstraints] = useState({ top: 0, left: 0, right: 0, bottom: 0 });
+
+    useEffect(() => {
+        const updateConstraints = () => {
+            setConstraints({
+                top: 0,
+                left: 0,
+                right: window.innerWidth - 100,
+                bottom: window.innerHeight - 100,
+            });
+        };
+        updateConstraints();
+        window.addEventListener('resize', updateConstraints);
+        return () => window.removeEventListener('resize', updateConstraints);
+    }, []);
 
     const handleDrag = (e: React.MouseEvent) => {
         setPosition({
@@ -33,12 +48,7 @@ export default function Drag() {
             bounceDamping: 500
             }}
 
-            dragConstraints={{
-            top: 20,
-            left: -450,
-            right: 1250,
-            bottom: 700,
-            }}
+            dragConstraints={constraints}
         />
     );
 }
