@@ -18,7 +18,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  filter: brightness(0.8);
+  filter: brightness(1);
 }
 
 a {
@@ -117,7 +117,7 @@ button:focus-visible {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.534);
   border-radius: 50%;
   bottom: 0;
   left: 50%;
@@ -128,7 +128,7 @@ button:focus-visible {
   position: absolute;
   width: 2px;
   height: 20px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.747);
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);

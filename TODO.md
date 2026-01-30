@@ -1,6 +1,7 @@
-# TODO: Add Boiling Visuals to Pot
+# TODO: Implement Falling Garden Plant Feature
 
-- [x] Create BoilingEffect.tsx component with animated bubbles and steam using Framer Motion
-- [x] Update App.tsx to import and position BoilingEffect over the pot
-- [x] Update app.css with styles for boiling effects
-- [x] Test the animation in the UI
+- [x] Create FallingPlant.tsx component for individual falling plant animations
+- [x] Update App.tsx to add state management for falling plants array
+- [x] Add button in App.tsx to trigger falling plant creation
+- [x] Render FallingPlant components in App.tsx
+- [x] Test the falling animation to ensure plants land inside the pot
