@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import { motion } from "motion/react";
 
 interface FallingPlantProps {
@@ -6,28 +7,39 @@ interface FallingPlantProps {
   onComplete: (id: number) => void;
 }
 
-export default function FallingPlant({ id, imgUrl, onComplete }: FallingPlantProps) {
-  const randomRotation = Math.random() > 0.5 ? 360 : -360; // Random clockwise or counterclockwise
+const PLANT_SIZE = 100;
+const DROP_HEIGHT = -300;
+const FALL_DISTANCE = 200;
+const FALL_DURATION = 0.8;
+
+// Simple deterministic pseudo-random function for performance
+function pseudoRandom(seed: number) {
+  return ((Math.sin(seed) + 1) / 2); // 0..1
+}
+
+const FallingPlant = memo(({ id, imgUrl, onComplete }: FallingPlantProps) => {
+  const horizontalOffset = useMemo(() => pseudoRandom(id) * 100 + 100, [id]);
+  const rotation = useMemo(() => (pseudoRandom(id + 42) > 0.5 ? 360 : -360), [id]);
 
   return (
     <motion.div
-      initial={{ y: -600, x: Math.random() * 100 + 100, rotate: 0 }} // Shifted 50px left
-      animate={{ y: -200, rotate: randomRotation }} // Fall closer to bottom and spin randomly
-      transition={{
-        duration: 0.8,
-        ease: "easeIn",
-      }}
+      initial={{ y: DROP_HEIGHT, x: horizontalOffset, rotate: 0 }}
+      animate={{ y: FALL_DISTANCE, rotate: rotation }}
+      transition={{ duration: FALL_DURATION, ease: "easeIn" }}
       onAnimationComplete={() => onComplete(id)}
       style={{
         position: "absolute",
-        width: 100,
-        height: 100,
+        width: PLANT_SIZE,
+        height: PLANT_SIZE,
         backgroundImage: `url(${imgUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        pointerEvents: 'none', // Non-interactive
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        pointerEvents: "none",
         zIndex: 10,
       }}
     />
   );
-}
+});
+
+FallingPlant.displayName = "FallingPlant";
+export default FallingPlant;
